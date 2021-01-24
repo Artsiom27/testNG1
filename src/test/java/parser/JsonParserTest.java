@@ -6,6 +6,7 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 import shop.Cart;
 import shop.RealItem;
 
@@ -25,7 +26,6 @@ public class JsonParserTest {
     private Cart eugenCart;
     private Parser parser;
     private List<RealItem> realItems;
-
 
 
     @BeforeSuite(groups = {"checkinTests"})
@@ -64,33 +64,33 @@ public class JsonParserTest {
         }
     }
 
-    @Test (groups = {"don't need"})
+    @Test(groups = {"don't need"})
     void isInstantiated() {
         Assert.assertNotNull(artsiomCart);
     }
 
 
-
     @Parameters("path")
-    @Test(groups = {"don't need"})
+    @Test(expectedExceptions = NoSuchFileException.class)
     void testOfExcepion(String path) {
-    Exception exception = Assert.assertThrows(NoSuchFileException.class, () -> parser.readFromFile(new File(path))); //I can't understand why this line doesn't  work correctly in idea
-    Assert.assertNotNull(exception.getMessage());
-}
+        Cart exceptiontest = parser.readFromFile(new File(path)); // only test name="testOfExcepion5" one of 5 have passed :(
 
-    //@DataProvider(name = "path")
-    //public static Object[] getPath(){
-    //static Stream<String> getPath() {
-      //  return new String[][]{{"src/main/resources/artsiom-cart"}, {"arsiom-cart.json", "artsiom-cart"}, {"resources/artsiom-cart"}, {"artsion cart"}};
-    //}
+        //Exception exception = Assert.assertThrows(NoSuchFileException.class, () -> parser.readFromFile(new File(path)));
+        //Assert.assertNull(exception.getMessage());
+    }
+
 
     @Test(groups = {"checkinTests"})
-    void readFromJsonFile()  {
+    void readFromJsonFile() {
         Cart testCart = parser.readFromFile(new File("src/main/resources/eugen-cart.json"));
         artsiomCart.showItems();
-            Assert.assertEquals("eugen-cart", testCart.getCartName());
-            Assert.assertEquals(26560.68, testCart.getTotalPrice());
+        SoftAssert softassert = new SoftAssert();
+
+        softassert.assertEquals("eugen-cart", testCart.getCartName());
+        softassert.assertEquals(26560.68, testCart.getTotalPrice());
+        softassert.assertAll();
 
     }
+
 }
 

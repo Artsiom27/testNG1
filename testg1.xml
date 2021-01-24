@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Suite">
 
-    <test name="testOfExcepion" >
+    <test name="testOfExcepion1" >
         <parameter name="path" value="src/main/resources/artsiom-cart" />
         <classes>
             <class name="parser.JsonParserTest">
@@ -16,7 +16,7 @@
         </classes>
 
     </test>
-    <test name="testOfExcepion" >
+    <test name="testOfExcepion2" >
         <parameter name="path" value="arsiom-cart.json" />
         <classes>
             <class name="parser.JsonParserTest">
@@ -30,7 +30,7 @@
         </classes>
 
     </test>
-    <test name="testOfExcepion" >
+    <test name="testOfExcepion3" >
         <parameter name="path" value="artsiom-cart" />
         <classes>
             <class name="parser.JsonParserTest">
@@ -44,7 +44,7 @@
         </classes>
 
     </test>
-    <test name="testOfExcepion" >
+    <test name="testOfExcepion4" >
         <parameter name="path" value="resources/artsiom-cart" />
         <classes>
             <class name="parser.JsonParserTest">
@@ -58,12 +58,12 @@
         </classes>
 
     </test>
-    <test name="testOfExcepion" >
+    <test name="testOfExcepion5" >
         <parameter name="path" value="artsion cart" />
         <classes>
             <class name="parser.JsonParserTest">
                 <methods>
-                    <include name="testWriteToFile" />
+                    <exclude name="testWriteToFile" />
                     <include name="testOfException" />
                     <exclude name="isInstantiated" />
                     <exclude name="readFromJsonFile" />
